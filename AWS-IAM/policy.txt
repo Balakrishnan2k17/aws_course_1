@@ -1,0 +1,107 @@
+
+aws_course_2_except_iam_user_delete: --> working
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    
+    {
+      "Sid": "AllowFullIAM",
+      "Effect": "Allow",
+      "Action": "iam:*",
+      "Resource": "*"
+    },
+
+    {
+      "Sid": "DenyDeleteUser",
+      "Effect": "Deny",
+      "Action": "iam:DeleteUser",
+      "Resource": "*"
+    },
+
+    {
+      "Sid": "DenyPassRole",
+      "Effect": "Deny",
+      "Action": "iam:PassRole",
+      "Resource": "*"
+    },
+
+    {
+      "Sid": "DenyCreateSLR",
+      "Effect": "Deny",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "*"
+    }
+
+  ]
+}
+
+
+
+	
+aws_course_3_block_malicious_ip:
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BlockSpecificIP",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "110.1.1.1/32"
+        }
+      }
+    }
+  ]
+}
+
+
+
+aws_course_4_allow_office_network:
+
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowOnlyCorporateNetwork",
+			"Effect": "Deny",
+			"Action": "*",
+			"Resource": "*",
+			"Condition": {
+				"NotIpAddress": {
+					"aws:SourceIp": [
+						"103.45.88.0/24"
+					]
+				}
+			}
+		}
+	]
+}
+
+
+
+aws_course_5_allow_mumbai_region: --> working
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowEC2OnlyInMumbai",
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestedRegion": "ap-south-1"
+                }
+            }
+        }
+    ]
+}
+
+
+
