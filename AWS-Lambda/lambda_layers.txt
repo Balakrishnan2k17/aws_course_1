@@ -1,0 +1,40 @@
+Lambda code:
+
+import json
+from my_utils import greet
+
+def lambda_handler(event, context):
+        
+    # Use greet function from layer
+    greeting = greet("AWS Cloud")
+        
+    return {
+        'statusCode': 200,
+        'body': json.dumps(greeting)
+    }
+
+
+
+Linux command:
+
+mkdir -p my-utils-layer/python
+cd my-utils-layer/
+vim my_utils.py --> edit and paste
+
+code:
+
+"""
+Custom utility functions to be shared across Lambda functions via Layer
+"""
+
+def greet(name):
+        """Simple greeting function"""
+        return f"Hello, {name}! Welcome to AWS Lambda with Layers!"
+
+again continue:
+
+cd my-utils-layer/
+zip -r ../my-utils-layer.zip .
+
+Download this file on Lambda, then deploy it and test it.
+
