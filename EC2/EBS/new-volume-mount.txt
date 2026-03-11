@@ -1,0 +1,14 @@
+create new volume on aws console
+attach it to that ec2 instance
+
+df -h
+lsblk
+
+sudo mkfs.ext4 /dev/xvdbz
+
+sudo mkdir /data
+
+sudo mount /dev/xvdbz /data
+
+df -h
+lsblk
