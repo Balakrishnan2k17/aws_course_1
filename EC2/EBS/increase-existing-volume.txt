@@ -1,0 +1,14 @@
+increase the volume size on aws console
+
+df -h
+lsblk
+
+sudo apt update
+sudo apt install cloud-guest-utils -y
+
+sudo growpart /dev/xvda 1
+
+sudo resize2fs /dev/xvda1
+
+df -h
+lsblk
