@@ -1,0 +1,21 @@
+create efs on aws console
+
+add sg with all traffic
+
+login ec2
+
+sudo apt update
+sudo apt install amazon-efs-utils -y
+sudo apt install nfs-common -y
+
+sudo mkdir /efs
+sudo mount -t nfs4 -o nfsvers=4.1 fs-12345678.efs.us-east-1.amazonaws.com:/ /efs
+
+
+permanent mount:
+
+sudo vim /etc/fstab
+add --> fs-12345678.efs.us-east-1.amazonaws.com:/ /efs nfs4 defaults,_netdev 0 0
+
+sudo mount -a
+touch /efs/testfile
