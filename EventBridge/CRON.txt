@@ -1,0 +1,82 @@
+create one event bridge scheduler with cron.
+
+* * * * *
+
+invoke lambda function
+
+save.
+
+
+create lambda function with python
+
+code:
+
+import boto3
+from datetime import datetime, timedelta, timezone
+
+s3 = boto3.client('s3')
+
+def lambda_handler(event, context):
+
+    bucket_name = "my-bucket"
+    file_name = "index.html"
+
+    # IST timezone
+    ist = timezone(timedelta(hours=5, minutes=30))
+
+    now = datetime.now(ist).strftime("%Y-%m-%d %H:%M:%S IST")
+
+    html_content = f"""
+    <html>
+    <head>
+        <title>Lambda Time</title>
+    </head>
+    <body>
+        <h1>Current Date and Time (IST)</h1>
+        <p>{now}</p>
+    </body>
+    </html>
+    """
+
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=file_name,
+        Body=html_content,
+        ContentType='text/html'
+    )
+
+    return {
+        "statusCode": 200,
+        "message": "HTML file uploaded successfully"
+    }
+
+
+provide lambda execution role:
+
+provide resource based policy:
+
+Other,
+Statement Name --> 
+scheduler.amazonaws.com --> principal
+arn:aws:scheduler:us-east-1:<AccountID>:schedule/default/cron-1 --> arn of eb
+lambda:InvokeFunction
+
+create s3 bucket:
+my-bucket
+enable versioning
+block public access
+bucket policy:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::my-bucket/*"
+        }
+    ]
+}
+
