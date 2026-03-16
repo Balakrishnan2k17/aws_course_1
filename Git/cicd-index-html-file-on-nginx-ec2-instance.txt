@@ -1,0 +1,51 @@
+name: Deploy index.html to EC2 via SCP
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Show Repository Structure
+      run: |
+        pwd
+        ls -la
+
+    # Create SSH key
+    - name: Create SSH Key
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" | base64 -d > key.pem
+        chmod 600 key.pem
+
+    # Copy index.html to EC2
+    - name: Upload index.html to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -i key.pem \
+        index.html \
+        ubuntu@3.146.217.46:/home/ubuntu/
+
+    # Deploy on EC2
+    - name: Deploy to Nginx
+      run: |
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@3.146.217.46 << 'EOF'
+
+        echo "Moving index.html to nginx directory..."
+
+        sudo mv /home/ubuntu/index.html /var/www/html/index.html
+
+        echo "Restarting nginx..."
+
+        sudo systemctl restart nginx
+
+        echo "Deployment completed."
+
+        EOF
