@@ -1,0 +1,38 @@
+Git: Version Control System
+
+git clone https://github.com/<username>/<repo.git>
+
+git status
+
+main branch: --> create a new file
+
+vim index.html
+git add .
+git status
+git commit -m "Added index.html file"
+git push origin main
+
+
+another branch: --> merge request
+
+git branch dev
+git branch
+git checkout dev
+git branch
+git merge main
+git push origin dev
+
+
+main branch: --> another changes
+
+git checkout main
+vim index.html
+git commit -m "Added index.html file v2"
+git push origin main
+
+
+main branch: --> rollback the changes
+
+git log --oneline
+git revert a7e9a3e
+git push origin main
