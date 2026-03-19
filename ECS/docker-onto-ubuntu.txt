@@ -1,0 +1,76 @@
+
+Docker installation on ubuntu:
+
+----------
+
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  noble stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+docker --version
+
+sudo usermod -aG docker ubuntu
+
+sudo systemctl status docker
+
+----------
+
+cd /home/ubuntu
+mkdir application
+vim index.html --> do some code
+vim Dockerfile
+ls
+
+
+----------
+
+paste:
+
+FROM nginx:latest
+
+# Remove default nginx files
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy your index.html into nginx folder
+COPY index.html /usr/share/nginx/html/
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+----------
+
+docker build -t my-nginx:v1 .
+
+docker images
+
+docker run -d -p 80:80 --name nginx-container my-nginx:v1
+
+docker ps
+
+docker exec -it <container_id> /bin/bash
+
+----------
+
+http://<ip_address>
