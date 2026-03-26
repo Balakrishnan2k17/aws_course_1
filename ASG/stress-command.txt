@@ -1,0 +1,6 @@
+On Ubuntu EC2.
+
+sudo apt update
+sudo apt install stress -y
+
+stress --cpu 2 --timeout 500
