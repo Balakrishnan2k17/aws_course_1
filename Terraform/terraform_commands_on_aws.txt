@@ -160,5 +160,99 @@ terraform {
 }
 
 
-------------------------------------------
+-------------------------------------------------------------------------
+
+
+variable.tf to pass values
+
+vim variables.tf
+
+variable "aws_region" {
+  description = "AWS region for deployment"
+  type        = string
+  default     = "ap-south-1"
+}
+
+variable "ami_id" {
+  description = "AMI ID for EC2 instance"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "instance_name" {
+  description = "Name tag for EC2 instance"
+  type        = string
+  default     = "Terraform-Demo"
+}
+
+
+----------------
+
+
+update vim provider.tf
+
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+
+----------------
+
+update main.tf
+
+resource "aws_instance" "demo" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+
+  tags = {
+    Name = var.instance_name
+  }
+}
+
+
+-----------------------------
+
+
+
+pass values to variable.tf file
+
+vim terraform.tfvars
+
+aws_region    = "ap-south-1"
+ami_id        = "ami-****"
+instance_type = "t3.micro"
+instance_name = "Terraform-Demo"
+
+
+-------------------------------
+
+
+output file to print the values:
+
+vim outputs.tf
+
+
+output "instance_id" {
+  description = "EC2 Instance ID"
+  value       = aws_instance.demo.id
+}
+
+output "public_ip" {
+  description = "Public IP of EC2 instance"
+  value       = aws_instance.demo.public_ip
+}
+
+output "private_ip" {
+  description = "Private IP of EC2 instance"
+  value       = aws_instance.demo.private_ip
+}
+
+
+--------------------------------------------------------------
 
