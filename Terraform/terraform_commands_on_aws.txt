@@ -1,0 +1,164 @@
+------------------------------------------
+
+terraform commands:
+
+terraform init
+terraform fmt
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+terraform show
+terraform state list
+terraform state show
+terraform output
+
+
+terraform files:
+
+main.tf
+variables.tf
+outputs.tf
+providers.tf
+backend.tf
+
+
+------------------------------------------
+
+hands-on:
+
+mkdir terraform-ec2
+cd terraform-ec2
+
+
+touch provider.tf main.tf
+
+
+vim provider.tf
+
+provider "aws" {
+  region = "ap-south-1"
+}
+
+
+vim main.tf
+
+resource "aws_instance" "demo" {
+  ami           = "ami-*****"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Terraform-Demo"
+  }
+}
+
+
+terraform init
+
+terraform validate
+
+terraform plan
+
+terraform apply
+
+ls -la
+
+
+-----------------
+
+
+terraform state list
+
+terraform state show <aws_instance.demo>
+
+
+-----------------
+
+
+If we need to change t2.micro to t2.medium --> change on main.tf file.
+
+
+else if you want another/new t2.medium EC2 then we need add the resource.
+
+
+resource "aws_instance" "demo" {
+  ami           = "ami-****"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Terraform-Demo"
+  }
+}
+
+resource "aws_instance" "demo2" {
+  ami           = "ami-****"
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "Terraform-Demo-2"
+  }
+}
+
+-----------------------
+
+
+Else same instance type with count is 2.
+
+
+resource "aws_instance" "demo" {
+  count         = 2
+  ami           = "ami-****"
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "Terraform-Demo-${count.index + 1}"
+  }
+}
+
+
+-----------------------
+
+
+If someone changed t2.micro to t3.micro on AWS Console.
+
+1. Reject Terraform Drift --> Revert back as per terraform state file
+	terraform plan
+	terraform apply
+
+2. Accept Terraform Drift --> Accept the AWS Console changes
+	1. Only refresh the terraform state file refresh --> "terraform apply -refresh-only" --> But Old code --> (replace code)
+	2. Change the code on local --> replace the code on main.tf (plan, apply) --> But Old state file --> refresh state file to track
+
+	1. Refresh the AWS Console only on Terraform state file, do "terraform apply -refresh-only"
+	2. Code change --> terraform plan --> replace the code then do terraform apply.
+
+
+------------------------------------------
+
+
+
+Destroy or Delete 
+
+terraform destroy
+
+
+------------------------------------------
+
+
+
+Backend Remote State file on S3
+
+vim backend.tf
+
+terraform {
+  backend "s3" {
+    bucket       = "bucket-1"
+    key          = "ec2-demo/terraform.tfstate"
+    region       = "ap-south-1"
+    use_lockfile = true
+  }
+}
+
+
+------------------------------------------
+
