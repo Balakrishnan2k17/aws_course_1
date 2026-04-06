@@ -1,0 +1,39 @@
+
+create the db on console:
+
+mysql engine.
+port: 3306
+setup: username and password
+
+once created, install required packages.
+
+sudo apt update
+sudo apt install -y mysql-client
+
+mysql --version
+
+mysql -h database-1.cf026a6ee7mb.ap-south-1.rds.amazonaws.com -P 3306 -u admin -p
+
+
+once logged in.
+
+SHOW DATABASES;
+
+CREATE DATABASE `db-1`;
+
+SHOW DATABASES;
+
+USE `db-1`;
+
+SELECT DATABASE();
+
+SHOW TABLES;
+
+CREATE TABLE `t-1` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+SHOW TABLES;
