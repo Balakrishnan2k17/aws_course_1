@@ -1,0 +1,50 @@
+pwd
+ls
+cd
+cd ..
+mkdir
+rmdir
+touch
+cp
+mv
+rm
+cat
+head
+tail
+echo
+clear
+whoami
+who
+w
+uname
+hostname
+ifconfig
+date
+cal
+history
+grep
+man
+find /home -name "*.txt"
+which
+wc -l
+tree
+chmod
+vim
+df -h
+du -sh
+free
+top
+systemctl
+apt install
+ping
+traceroute
+wget
+ssh
+scp
+zip
+unzip
+netstat -tunlp
+lsblk
+uptime
+last
+sudo su
