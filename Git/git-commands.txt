@@ -28,7 +28,7 @@ git branch dev
 git branch
 git checkout dev
 git branch
-git merge main
+git merge main  --> else git add . and git commit -m "msg"
 git push origin dev
 
 
