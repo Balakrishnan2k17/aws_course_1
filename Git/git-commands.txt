@@ -1,5 +1,14 @@
 Git: Version Control System
 
+{
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Balakrishnan2k17/file.git
+git push -u origin main
+}
+
 git clone https://github.com/<username>/<repo.git>
 
 git status
