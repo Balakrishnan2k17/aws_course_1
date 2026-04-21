@@ -1,0 +1,51 @@
+name: Build, Push & Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - aws-cicd
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-2
+  ECR_IMAGE: 2626472870.dkr.ecr.us-east-2.amazonaws.com/rt-etrm-backend-aws-1:latest
+  ECS_CLUSTER: rt-etrm
+  ECS_SERVICE: etrm-backend-aws-service-7ncq0vak
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 🔹 Configure AWS Credentials using Access Key & Secret
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: YOUR_ACCESS_KEY
+        aws-secret-access-key: YOUR_SECRET_KEY
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Login to ECR
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build Docker Image (No Cache)
+      run: |
+        docker build 
+
+    - name: Push Docker Image
+      run: |
+        docker push $ECR_IMAGE
+
+    - name: Wait for Image Availability
+      run: sleep 15
+
+    - name: Force New Deployment
+      run: |
+        aws ecs update-service \
+          --cluster $ECS_CLUSTER \
+          --service $ECS_SERVICE \
+          --force-new-deployment
