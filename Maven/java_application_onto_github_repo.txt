@@ -1,0 +1,127 @@
+
+
+
+GitHub Code:
+
+Repo: devops-demo-app
+
+
+
+devops-demo-app/
+├── pom.xml
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/demo/HelloServlet.java
+│       └── webapp/
+│           └── index.jsp
+
+
+--------------------------------------------------------------
+
+pom.xml
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.demo</groupId>
+    <artifactId>devops-demo</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>DevOps Demo App</name>
+
+    <!-- Java Version -->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build -->
+    <build>
+        <!-- This controls WAR name -->
+        <finalName>devops-demo</finalName>
+
+        <plugins>
+            <!-- Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+
+            <!-- WAR Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+
+----------------------------------------------------
+
+
+HelloServlet.java
+
+
+package com.demo;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/hello")
+public class HelloServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        response.getWriter().println("<h1>Welcome to DevOps Demo App</h1>");
+        response.getWriter().println("<h2>CI/CD using GitHub Actions</h2>");
+        response.getWriter().println("<p>Instructor: Balakrishnan</p>");
+    }
+}
+
+
+-----------------------------------------------------------
+
+
+index.jsp
+
+
+<html>
+<head>
+    <title>DevOps Demo</title>
+</head>
+<body>
+    <h2>Welcome to DevOps Pipeline Demo</h2>
+    <a href="hello">Click here to go to servlet</a>
+</body>
+</html>
+
+
+-------------------------------------------------------------
+
+
