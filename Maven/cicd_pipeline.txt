@@ -1,0 +1,80 @@
+
+
+
+CICD pipeline:
+
+main.yml
+
+
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # Checkout
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Setup Java
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    # Build
+    - name: Build with Maven
+      run: mvn clean package
+
+    # Verify build
+    - name: Check WAR
+      run: ls -l target/
+
+    # Setup SSH key
+    - name: Setup SSH Key
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+        sed -i 's/\r$//' key.pem
+        chmod 400 key.pem
+
+    # Copy to EC2
+    - name: Copy WAR to EC2
+      run: |
+        scp -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i key.pem \
+        target/devops-demo.war \
+        ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/
+
+    # Deploy in EC2
+    - name: Deploy to Tomcat
+      run: |
+        ssh -o StrictHostKeyChecking=no -i key.pem \
+        ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
+
+        sudo rm -rf /opt/tomcat/webapps/devops-demo*
+        sudo cp /tmp/devops-demo.war /opt/tomcat/webapps/
+        sudo systemctl restart tomcat
+
+        EOF
+
+
+----------------------------------------------------------------------------------
+
+
+Secrets:
+
+EC2_USER --> ec2-user
+EC2_SSH_KEY --> -----BEGIN RSA PRIVATE KEY-----
+EC2_HOST --> <Public_IP>
+DEPLOY_PATH --> /opt/tomcat/webapps
+
+
+----------------------------------------------------------------------------------
+
+
