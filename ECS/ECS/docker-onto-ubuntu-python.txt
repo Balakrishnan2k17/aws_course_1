@@ -1,0 +1,38 @@
+create a folder under /home/ubuntu
+
+mkdir /home/ubuntu/python-app
+
+create python file:
+
+vim app.py
+
+paste:
+
+from datetime import datetime
+current_time = datetime.now()
+print("Current Date and Time:", current_time.strftime("%Y-%m-%d %H:%M:%S"))
+
+
+it will print current date and time.
+
+
+create docker file:
+
+paste:
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY app.py .
+
+CMD ["python", "app.py"]
+
+
+then execute docker build and run command:
+
+docker build -t my-python-app:v1 .
+
+docker run --name python-container my-python-app:v1
+
+----
