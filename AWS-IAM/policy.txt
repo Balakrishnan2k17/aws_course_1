@@ -68,7 +68,7 @@ aws_course_4_allow_office_network:
 	"Statement": [
 		{
 			"Sid": "AllowOnlyCorporateNetwork",
-			"Effect": "Deny",
+			"Effect": "Allow",
 			"Action": "*",
 			"Resource": "*",
 			"Condition": {
