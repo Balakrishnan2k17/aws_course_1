@@ -1,0 +1,11 @@
+
+Actions:	            	-->	  Event Name
+
+Start EC2 Instance  	  -->  	StartInstances
+Stop EC2 Instance      	-->  	StopInstances
+Reboot EC2 Instance    	-->	  RebootInstances
+Terminate EC2 Instance	-->  	TerminateInstances
+Launch EC2 Instance	    -->  	RunInstances
+
+Create S3 Bucket	      -->  	CreateBucket
+Delete S3 Bucket	      -->  	DeleteBucket
