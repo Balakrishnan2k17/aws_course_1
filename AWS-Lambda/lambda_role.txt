@@ -1,0 +1,16 @@
+import boto3
+
+def lambda_handler(event, context):
+    s3 = boto3.client('s3')
+
+    response = s3.list_buckets()
+
+    bucket_names = [bucket['Name'] for bucket in response['Buckets']]
+
+    for bucket in bucket_names:
+        print(bucket)
+
+    return {
+        "statusCode": 200,
+        "buckets": bucket_names
+    }
