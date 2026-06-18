@@ -1,0 +1,16 @@
+
+FROM: Base image
+WORKDIR: working directory
+COPY: copy the file
+ADD: extract tar and download the file from the internet
+LABLE: Metadata
+RUN: execute the command while building the image
+EXPOSE: container port
+ENV: Env variable
+ARG: Build time variable
+CMD: default command executed when the container starts
+ENTRYPOINT: container behaves like an executable
+
+CMD: Can be overridden
+ENTRYPOINT: Cannot be overridden
+  
