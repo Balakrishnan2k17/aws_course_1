@@ -48,3 +48,58 @@ lsblk
 uptime
 last
 sudo su
+
+
+--------------
+
+pwd --> present working directory
+ls --> list
+ls -ltrh --> list all files including files/directories
+cd --> change directory
+cd .. --> drop directory
+mkdir --> make directory
+rmdir --> remove directory
+touch --> create empty file
+cp --> copy
+mv --> move
+rm --> remove
+cat --> print content
+head --> print 1st 10 lines
+tail --> print last 10 lines
+echo --> print the value while run time
+clear --> clear the window
+whoami --> print name
+who --> print name
+w --> print name
+uname --> print name
+hostname --> print system name
+ifconfig --> print IP
+date --> date
+cal --> calender
+history --> print history
+grep --> filter
+man --> manual
+find /home -name "*.txt" --> find the files
+which --> packages finder
+wc -l --> word count
+tree --> branches
+chmod --> change modification
+vim --> editor
+df -h --> disk checker
+du -sh --> disk usage checker
+free --> memory
+top --> cpu
+systemctl --> service
+apt install --> installing the packages
+ping --> connection
+traceroute --> track route
+wget --> download the files from the internet
+ssh --> secure shell
+scp --> copy files from server to server
+zip --> zip
+unzip --> unzip
+netstat -tunlp --> identify the open ports
+lsblk --> disk partition
+uptime --> running time
+last --> last reboot
+sudo su --> super user do
