@@ -26,6 +26,10 @@ Creating IAM User using AWS CLI Commands:
 
 aws iam create-user --user-name devops-user-1
 
+List out iam users:
+
+aws iam list-users
+
 ---------------------------------------------
 
 Creating IAM User using (SDK) Python script: 
