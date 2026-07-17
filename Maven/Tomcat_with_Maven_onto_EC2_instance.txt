@@ -1,0 +1,145 @@
+
+
+Tomcat with Maven onto EC2 instance:
+
+sudo dnf update -y
+sudo dnf install maven -y
+mvn -version
+
+cd /root
+
+mvn archetype:generate \
+-DgroupId=com.demo \
+-DartifactId=hello \
+-DarchetypeArtifactId=maven-archetype-webapp \
+-DinteractiveMode=false
+
+
+output:
+
+hello/
+│
+├── pom.xml
+└── src
+    └── main
+        └── webapp
+            ├── index.jsp
+            └── WEB-INF
+
+
+Edit/Replace:
+
+vim src/main/webapp/index.jsp
+
+
+<html>
+<head>
+<title>My First Maven App</title>
+</head>
+
+<body>
+
+<h1>Hello AWS DevOps!</h1>
+
+<h2>Tomcat is Working</h2>
+
+<p>Running on Amazon Linux 2023</p>
+
+</body>
+</html>
+
+
+cd /hello
+
+
+Edit/Replace:
+
+vim pom.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.demo</groupId>
+    <artifactId>hello</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>hello Maven Webapp</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>hello</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
+
+
+Verify the pwd should be hello folder
+
+mvn clean package
+
+cd target
+
+Verify hello.war
+
+
+sudo cp target/hello.war /opt/tomcat/webapps/
+
+
+ls /opt/tomcat/webapps/
+
+
+sudo systemctl restart tomcat
+
+sudo systemctl status tomcat
+
+
+http://<PUBLIC-IP>:8080/hello
+
+
+
+Logs:
+
+tail -f /opt/tomcat/logs/catalina.out --> Tomcat logs
+
+ls /opt/tomcat/logs --> Application logs
+
+
+
+
+
+
