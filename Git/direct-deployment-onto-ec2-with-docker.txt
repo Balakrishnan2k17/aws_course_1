@@ -57,3 +57,9 @@ jobs:
         docker load < cicd_for_aws.tar
         docker run -d -p 8080:80 --name $CONTAINER $IMAGE_NAME
         EOF
+
+
+need to  add docker username onto EC2 instance for taking ssh onto the instance:
+
+sudo usermod -aG docker ubuntu
+newgrp docker
