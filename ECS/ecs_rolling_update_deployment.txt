@@ -36,7 +36,7 @@ jobs:
 
     - name: Build Docker Image (No Cache)
       run: |
-        docker build 
+        docker build --no-cache -t $ECR_IMAGE .
 
     - name: Push Docker Image
       run: |
