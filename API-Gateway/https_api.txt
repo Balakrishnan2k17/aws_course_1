@@ -1,0 +1,11 @@
+Create HTTP API
+
+api-time
+
+Add lambda function with arn,
+
+Add GET method with /time and with lambda
+
+Create and get the URL
+
+https://yb175j0of.execute-api.us-east-1.amazonaws.com/time
