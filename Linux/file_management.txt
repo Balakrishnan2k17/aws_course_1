@@ -1,0 +1,71 @@
+pwd
+cd
+cd ..
+cd ../..
+cd ~
+cd -
+touch
+echo
+cat
+mkdir
+mkdir -p
+rmdir
+rm
+rm -rf
+ls
+ls -ltrh
+ls -ltrh *.log
+ls *1*
+ls file?.txt
+ls file??.txt
+ls file?.*
+cp
+mv
+head
+tail
+more
+less
+clear
+history
+wc -l
+
+vim
+i --> insert
+esc: w
+esc: q
+esc: wq
+
+
+esc dd --> delete line
+esc: 1d --> delete 1st line
+esc: set number --> set line number
+esc: set nonumber --> remove line number
+
+
+
+touch file{1..10}.txt
+
+touch file{1..5}.{txt,log}
+
+touch {devops,linux,aws,docker,kubernetes}.txt
+
+mkdir dir{1..5}
+
+mkdir {devops,linux,aws,docker}
+
+mkdir -p project/{dev,test,prod}
+
+mkdir -p project/{dev,test,prod}/{logs,config,data}
+
+
+echo {1..10}
+
+echo {1..5} {15..20}
+
+echo {1..20..2}
+
+echo {10..1}
+
+echo {a..z}
+
+echo {a..f}
