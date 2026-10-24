@@ -1,0 +1,39 @@
+
+File Permissions:
+
+read 4
+write 2
+execute 1
+
+chmod 755 file1.txt
+chmod 644 file1.txt
+
+chmod u+x file1.txt
+chmod g-w file1.txt
+
+
+File Structure:
+
+/ --> Root of the entire filesystem
+├── bin --> Essential user commands
+├── boot --> Bootloader and Linux kernel files
+├── dev --> Device files
+├── etc --> System-wide configuration files
+├── home --> Home directories of regular users
+│   ├── ubuntu
+│   └── linux
+├── lib --> Essential shared libraries and kernel modules
+├── lib64 --> Essential shared libraries and kernel modules
+├── media --> Mount points for removable media
+├── mnt --> Temporary or manually created mount points
+├── opt --> Optional third-party applications
+├── proc --> Virtual filesystem containing process and kernel information
+├── root --> Home directory of the root user
+├── run --> Runtime state data, generally cleared on reboot
+├── sbin --> Essential system administration commands
+├── srv --> Data served by system services
+├── sys --> Kernel and device information
+├── tmp --> Temporary files
+├── usr --> Applications, libraries, documentation, and utilities
+└── var --> Frequently changing data
+
