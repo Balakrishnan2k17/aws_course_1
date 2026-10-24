@@ -1,0 +1,58 @@
+
+Creating New User and User Group: linux:linuxgroup
+
+cat /etc/passwd --> Users list
+cat /etc/sudoers --> Sudo access list
+cat /etc/group --> list all groups
+groups ubuntu --> check ubuntu's groups
+id ubuntu --> check id
+getent group sudo --> sudo group
+
+cat /etc/passwd --> list all users
+sudo -l --> get current access
+
+
+
+sudo groupadd linuxgroup --> create group
+getent group linuxgroup --> verify group
+sudo useradd -m -s /bin/bash -g linuxgroup linux --> create user with home directory, shell and group
+sudo passwd linux --> set password
+
+sudo passwd linux --> reset password
+
+
+vim /etc/sudoers.d/linuxgroup --> open this file and paste the below line
+
+%linuxgroup ALL=(ALL:ALL) ALL
+
+sudo visudo -cf /etc/sudoers.d/linuxgroup --> validate the checks
+
+id bala --> print user id, group id
+
+
+sudo chown linux a.txt --> change owner
+sudo chgrp linuxgroup a.txt --> change group
+
+sudo chown linux:linuxgroup a.txt --> single command
+sudo chown -R linux:linuxgroup /home/ubuntu --> entire and child directory
+
+
+delete user and group
+
+pgrep -a -u linux --> check running process
+kill -9 1698 --> kill if exist
+
+
+sudo userdel -r linux --> delete user
+sudo ps -fp 1772 --> check running PID
+sudo pgrep -a -u linux
+sudo kill -TERM 1772
+sudo kill -KILL 1772
+
+sudo userdel -r linux
+sudo groupdel linuxgroup
+sudo rm -f /etc/sudoers.d/linuxgroup
+
+getent passwd linux
+
+
