@@ -11,10 +11,10 @@ java -version
 sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
 
 cd /tmp
-wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.117/bin/apache-tomcat-9.0.117.tar.gz
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.123/bin/apache-tomcat-9.0.123.tar.gz
 
 sudo mkdir /opt/tomcat
-sudo tar -xvzf apache-tomcat-9.0.117.tar.gz -C /opt/tomcat --strip-components=1
+sudo tar -xvzf apache-tomcat-9.0.123.tar.gz -C /opt/tomcat --strip-components=1
 
 sudo chown -R tomcat:tomcat /opt/tomcat
 sudo chmod -R 755 /opt/tomcat
