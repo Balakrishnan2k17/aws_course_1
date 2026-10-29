@@ -11,6 +11,22 @@ chmod 644 file1.txt
 chmod u+x file1.txt
 chmod g-w file1.txt
 
+-----------------------
+
+-rwxrwxrwx
+dr--r--r--
+
+-----------------------
+
+-	Regular file
+d	Directory
+l	Symbolic link
+c	Character device
+b	Block device
+p	Named pipe (FIFO)
+s	Socket
+
+------------------------
 
 File Structure:
 
@@ -36,4 +52,8 @@ File Structure:
 ├── tmp --> Temporary files
 ├── usr --> Applications, libraries, documentation, and utilities
 └── var --> Frequently changing data
+
+ls -ltrh /dev
+echo "$SHELL"
+cat /etc/shells
 
