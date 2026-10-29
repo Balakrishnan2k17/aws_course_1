@@ -56,4 +56,8 @@ File Structure:
 ls -ltrh /dev
 echo "$SHELL"
 cat /etc/shells
+which mkdir
+which ls
+which python
+type cd
 
