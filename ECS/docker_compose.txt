@@ -1,0 +1,74 @@
+Docker Compose:
+
+nginx-project/
+├── Dockerfile
+├── docker-compose.yml
+└── index.html
+
+services	      Defines the containers
+nginx	          Service name
+build	          Build image using Dockerfile
+context: .	    Current directory is the build context
+dockerfile	    Dockerfile name
+image	          Name of the generated image
+container_name	Container name
+ports	          Maps host port 8080 to container port 80
+restart	        Automatically restart the container
+
+
+index.html:
+
+Docker - Compose - Deployment
+
+
+Dockerfile:
+
+FROM nginx:latest
+
+COPY index.html /usr/share/nginx/html/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+
+docker-compose.yml:
+
+services:
+  nginx1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-nginx-image:latest
+    container_name: nginx-container-1
+    ports:
+      - "8080:80"
+    restart: always
+
+  nginx2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-nginx-image:latest
+    container_name: nginx-container-2
+    ports:
+      - "8081:80"
+    restart: always
+
+
+
+Docker command				              Docker Compose equivalent
+docker build -t my-nginx .		      docker compose build
+docker run -d -p 8080:80 my-nginx	  docker compose up -d
+docker ps				                    docker compose ps
+docker logs container_name		      docker compose logs
+docker stop container_name		      docker compose stop
+docker rm container_name		        docker compose down
+
+
+docker compose up -d --build
+
+docker compose ps
+
+docker compose down
+  
