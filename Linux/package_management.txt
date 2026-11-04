@@ -1,0 +1,54 @@
+
+Package Management:
+
+APT : Advanced Package Tool : Used in Ubuntu and Debian.
+
+DNF : Dandified YUM : Used in Fedora, RHEL 8+, and Amazon Linux 2023.
+
+YUM : Yellowdog Updater Modified : Used in older RHEL-based systems and Amazon Linux 2.
+
+
+sudo apt install nginx
+sudo dnf install nginx
+sudo yum install nginx
+
+
+
+
+Package format:
+
+APT: .deb --> Debian package
+DNF: .rpm --> Red Hat Package Manager
+YUM: .rpm --> Red Hat Package Manager
+
+
+Install:	apt install
+Update: 	apt update
+Upgrade:	apt upgrade
+Remove: 	apt remove
+
+
+cat /etc/os-release --> Check OS details
+
+
+sudo apt update --> Packages update
+sudo apt list --upgradable --> list package upgradable
+sudo apt upgrade --> Packages upgrade
+sudo apt upgrade -y --> Auto approve
+apt list --installed --> List out all installed packages
+apt search nginx --> Search package
+sudo apt install nginx --> Install package
+sudo apt remove nginx --> Remove package
+
+
+Download and Install package from internet:
+
+sudo dpkg -i package.deb
+dpkg -l nginx
+
+
+Kernel:
+
+uname -r --> Check current kernel
+sudo apt list --upgradable --> list package upgradable
+
