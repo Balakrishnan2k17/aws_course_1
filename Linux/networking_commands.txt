@@ -21,3 +21,11 @@ nmap 192.168.1.10
 nmap -p- 192.168.1.10
 nmap -sV 192.168.1.10
 whois google.com
+
+sudo iptables -L -n -v
+sudo iptables -L INPUT -n --line-numbers
+
+sudo iptables -A INPUT -s 192.168.1.100 -j ACCEPT
+sudo iptables -A INPUT -s 192.168.1.100 -p tcp --dport 80 -j ACCEPT
+
+sudo iptables -D INPUT -s 192.168.1.100 -j ACCEPT
