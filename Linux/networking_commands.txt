@@ -1,0 +1,23 @@
+ifconfig
+ip addr
+hostname
+hostname -i
+ping google.com
+traceroute google.com
+nslookup google.com
+wget
+ssh
+scp
+netstat -tunlp
+curl https://google.com
+curl -I https://google.com
+curl -v https://google.com
+dig google.com
+dig google.com A
+nc -zv google.com 443
+nc -zv 192.168.1.10 22
+telnet google.com 80
+nmap 192.168.1.10
+nmap -p- 192.168.1.10
+nmap -sV 192.168.1.10
+whois google.com
