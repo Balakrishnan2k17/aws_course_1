@@ -1,0 +1,89 @@
+Bash script: env/cmd
+
+#!/bin/bash
+echo "Current User: $(whoami)"
+
+
+Bash script: for loop
+
+#!/bin/bash
+for i in {1..10}
+do
+    echo "Number: $i"
+done
+
+CRON Job:
+
+sudo systemctl enable cron
+
+crontab -e --> Edit
+crontab -l --> List
+crontab -r --> Remove
+
+* * * * * command
+│ │ │ │ │
+│ │ │ │ └── Day of week (0-7)
+│ │ │ └──── Month (1-12)
+│ │ └────── Day of month (1-31)
+│ └──────── Hour (0-23)
+└────────── Minute (0-59)
+
+Every minute		* * * * *
+Every 5 minutes		*/5 * * * *
+Every 10 minutes	*/10 * * * *
+Every hour		0 * * * *
+Every day at 12 AM	0 0 * * *
+Every day at 10 PM	0 22 * * *
+Every Sunday 12 AM	0 0 * * 0
+Every month 1st 12AM	0 0 1 * *
+Every 1 to 5th min	1-5 * * * *
+
+* * * * * /bin/bash /home/ubuntu/scripts/backup.sh
+* * * * * /usr/bin/python3 /home/ubuntu/scripts/monitor.py
+
+
+Find:
+
+find /home/ubuntu -name "*.txt" --> filter
+find /home/ubuntu -type f -mtime +7 --> check older 7 days files
+find /home/ubuntu -type f -mtime +7 -delete --> delete older 7 days files
+find /home/ubuntu -type f -size +10M --> files more than 10MB
+find /home/ubuntu -type f -size +10M -mtime +7 -delete
+
+
+Log rotate:
+
+/home/ubuntu/myapp/logs/app.log
+
+sudo vim /etc/logrotate.d/myapp
+
+paste:
+
+/home/ubuntu/myapp/logs/*.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+}
+
+sudo logrotate -d /etc/logrotate.d/myapp --> Execute log rotate
+
+ls -lh /home/ubuntu/myapp/logs/ --> test eg: location
+
+
+Other commands:
+
+grep -i "error" /var/log/syslog
+cat 
+history | grep ls
+!100
+!100:p
+!!
+cd ~
+cd -
+cat a.txt
+cat a.txt | grep AWS
+cat a.txt | wc
+cat a.txt | wc -l
+echo "A" && echo "B" && echo "C"
