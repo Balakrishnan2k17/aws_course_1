@@ -12,6 +12,8 @@ do
     echo "Number: $i"
 done
 
+-----------------------------------
+
 CRON Job:
 
 sudo systemctl enable cron
@@ -40,6 +42,43 @@ Every 1 to 5th min	1-5 * * * *
 
 * * * * * /bin/bash /home/ubuntu/scripts/backup.sh
 * * * * * /usr/bin/python3 /home/ubuntu/scripts/monitor.py
+
+
+script to create a .txt file every min:
+
+script.sh
+
+#!/bin/bash
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+FILE="/home/ubuntu/file_${TIMESTAMP}.txt"
+echo "File created at: $(date)" > "$FILE"
+echo "Created: $FILE"
+
+change default notepad to vim: export EDITOR=vim && echo $EDITOR
+
+crontab -e
+
+* * * * * /bin/bash /home/ubuntu/script.sh
+
+crontab -l
+
+crontab -r
+
+-----------------------------------
+
+Custom command: linux
+
+vim /usr/local/bin/linux
+
+#!/bin/bash
+echo "Linux Session"
+
+chmod +x /usr/local/bin/linux
+
+type: linux
+
+
+-----------------------------------
 
 
 Find:
